@@ -1,5 +1,5 @@
 (executable
  (public_name chat)
  (name main)
- (libraries chat eio eio_main logs logs.fmt domainslib)
+ (libraries chat eio eio_main logs logs.fmt)
  (preprocess (pps ppx_deriving.make)))

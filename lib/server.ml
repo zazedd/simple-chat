@@ -20,11 +20,28 @@ let handle_incoming flow entity =
               (fun k fl -> if k <> m.origin then cstr +> fl)
               entity.flows;
             h ()
+        | End_to_end (m, dest) ->
+            (match Hashtbl.find_opt entity.flows dest with
+            | Some fl ->
+                (* If we find a connected user, lets send him the message and
+                   confirm to the sender that he got it *)
+                cstr +> fl;
+                (Confirmation
+                   { receiver_id = dest; time_took = got_at -. m.sent_at }
+                |> to_cstruct)
+                +> flow
+            | _ ->
+                (Error "Client requested is not connected." |> to_cstruct)
+                +> flow);
+            h ()
         | Confirmation { receiver_id; time_took } ->
             Logs.info (fun m ->
                 m "Message received by Client %d | Time took: %fs" receiver_id
                   time_took)
             |> ignore;
+            h ()
+        | Error s ->
+            Logs.err (fun m -> m "%s" s) |> ignore;
             h ()
         | Exit client_num ->
             traceln "See you later, Client %d" client_num;

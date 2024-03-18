@@ -15,6 +15,8 @@ let () =
     | "c" | "client" ->
         Client.client ~stdin:(Eio.Stdenv.stdin env) ~net:(Eio.Stdenv.net env)
     | _ ->
-        InvalidChoice "Available options are: s (server), c (client)" |> raise
+        InvalidChoice
+          "Too many arguments. Available options are: s (server), c (client)"
+        |> raise
   in
   Eio_main.run @@ fun env -> r env |> ignore

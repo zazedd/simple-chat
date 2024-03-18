@@ -12,14 +12,17 @@ let handle_incoming flow entity =
         let cstr = Cstruct.sub buf 0 n in
         let message = from_cstruct cstr in
         match message with
-        | User m ->
+        | User m | End_to_end (m, _) ->
             handle_user_message m flow entity.id got_at;
             h ()
         | Confirmation { receiver_id; time_took } ->
-            assert (receiver_id = 0);
+            let out = pp_server_client receiver_id in
             Logs.info (fun m ->
-                m "Message received by Server | Time took: %fs" time_took)
+                m "Message received by %s | Time took: %fs" out time_took)
             |> ignore;
+            h ()
+        | Error s ->
+            Logs.err (fun m -> m "%s" s) |> ignore;
             h ()
         | Exit _ ->
             traceln "See you space cowboy...";

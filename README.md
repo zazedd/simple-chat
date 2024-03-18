@@ -19,9 +19,16 @@ dune exec chat <option>
 `option` can be one of the following:  
 `s` or `server`; `c` or `client`
 
-### Functionalities
+### Features
 
 A client can read and write text messages. It can also choose what IP and port to connect to.
+
+A client can also send end to end messages, like so:
+```
+/msg <id> <message>
+```
+Where `id` is the `id` of the receiver (i.e. 2), and `message` is the message to be sent.  
+If the receiver doesn't exist the client will get an error that warns him of such.
 
 The server can see when and which client connects and disconnects.  
 When it receives a message from a client it broadcasts it to other connected clients.  
