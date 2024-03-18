@@ -12,7 +12,9 @@ The OCaml version used was 5.1.1.
 
 ### Running:
 
-`dune exec chat <option>`
+```
+dune exec chat <option>
+```
 
 `option` can be one of the following:  
 `s` or `server`; `c` or `client`
@@ -26,10 +28,14 @@ When it receives a message from a client it broadcasts it to other connected cli
 It can also read and send text messages to the clients itself.
 
 If all goes well, the client should get a message of this type:  
-`Message received by Server | Time took: 0.000440s`
+```
+Message received by Server | Time took: 0.000440s
+```
 This message confirms that the server has received the message.  
 The server also gets confirmation on which clients received messages:  
-`Message received by Client 2 | Time took: 0.001320s`
+```
+Message received by Client 2 | Time took: 0.001320s
+```
 
 #### Quitting
 Client: `CTRL+D` closes the connection and quits. The server stays on and other clients stay connected.  
@@ -37,7 +43,9 @@ Server: `CTRL+D` closes all connections and quits. Also signals all connected cl
 
 ### Testing:
 
-```dune runtest```
+```
+dune runtest
+```
 
 Unfortunately I couldn't get tests to work properly, the server's stdin always gets an EOF and finishes
 before I can send a message through a client flow.
