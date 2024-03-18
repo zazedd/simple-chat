@@ -1,0 +1,5 @@
+(library
+ (name chat)
+ (public_name chat)
+ (libraries eio eio_main logs logs.fmt)
+ (preprocess (pps ppx_deriving.make)))

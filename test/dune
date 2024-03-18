@@ -1,0 +1,5 @@
+(library
+ (name test_chat)
+ (libraries chat eio.mock)
+ (inline_tests)
+ (preprocess (pps ppx_inline_test)))
