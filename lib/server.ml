@@ -3,6 +3,7 @@ open Common
 
 let client_num = ref 0
 
+(* Handles any incoming message *)
 let handle_incoming flow entity =
   let rec h () =
     let buf = Cstruct.create 2000 in
@@ -32,6 +33,7 @@ let handle_incoming flow entity =
   in
   h ()
 
+(* Prepares for a new client and starts accepting their incoming messages*)
 let run server_entity fl _ =
   client_num := !client_num + 1;
   Hashtbl.add server_entity.flows !client_num fl;

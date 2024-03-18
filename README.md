@@ -21,9 +21,9 @@ dune exec chat <option>
 
 ### Functionalities
 
-A client can read and write text messages.  
+A client can read and write text messages. It can also choose what IP and port to connect to.
 
-The server can see when a client connects, when a client disconnects.  
+The server can see when and which client connects and disconnects.
 When it receives a message from a client it broadcasts it to other connected clients.  
 It can also read and send text messages to the clients itself.
 

@@ -14,7 +14,6 @@ let () =
           ~addr
     | "c" | "client" ->
         Client.client ~stdin:(Eio.Stdenv.stdin env) ~net:(Eio.Stdenv.net env)
-          ~addr
     | _ ->
         InvalidChoice "Available options are: s (server), c (client)" |> raise
   in
